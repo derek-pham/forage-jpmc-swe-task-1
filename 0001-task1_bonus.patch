@@ -1,0 +1,75 @@
+From ece43718547a329d3047d654d57cf6c6999d5feb Mon Sep 17 00:00:00 2001
+From: derek-pham <derekpham3@gmail.com>
+Date: Mon, 13 May 2024 12:50:48 +1000
+Subject: [PATCH] - task1_bonus
+
+---
+ __pycache__/client3.cpython-312.pyc | Bin 0 -> 1683 bytes
+ client_test.py                      |  12 +++++++++++-
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+ create mode 100644 __pycache__/client3.cpython-312.pyc
+
+diff --git a/__pycache__/client3.cpython-312.pyc b/__pycache__/client3.cpython-312.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..9c08ad01aba502d3f84adcf9338b8a880962ab47
+GIT binary patch
+literal 1683
+zcmah}O-vg{6rS<^*v3C#z!1Pymq;`?!Tcnpr3hM)08tLHAZ?<ua%(N#0oE9=v%56H
+zH4>_NaMV_E)B{9SR2ua_#U+s{HR>sC4?XmPv7)$>9#Zv`Qwj9Msc+VHOGTuPwC``;
+z`{vDiZ}u0TuMWZbOdFdkxe@w<DYfOR3I}&FLhDFHDo!D}!m*5P-63<TL*`XZ7F7OY
+zB#Wv5)Ja^bxY&)5@vQ?9H+*$O*aj4~YJ42McNZbq1G^}BqOy0C5-!<(RIkX%myX*A
+zpM3ea6>xFVaooOLHP!N{@nq-!`^o_~(vaLp0+4+evTuS@MAB5li1A=+mV<JO+)7$W
+zBWWH1Q1CgSI!W^vSap#gP&a7-T1Q%edhWPu(HMPthOc;gA;w7>RbLy#1NSq&UA;|K
+z{I`k_^EHoF@CpvsKVuh&W;+)wD>K~Jm(mkTYC$)x;i3Ma{=VzW#8`PtQ%65s)&7EB
+zB&z*jK?w3j9DE09AnVADa?ovd<|?-S@dKNK*;LNXrfOex{KtcTfd`j!<hU%06tW(`
+z<a3x=a{L_sHVTW`*QF^#SC<n+Qc@|&S|C!I5S6IX2TE$0n3APS^CV3S#R3mWRV*c=
+zYiUcOf@$fAMe4NlOng>TsgN<W1gYqXx%i9~ER3lzm(mq0EKuS4vThNB-Ilr`AYSoz
+zgKtGNptQ&ofJkf|zM2@0T{Vee#>R<37GtK7h|TGSGEXAO%u*s^-XIYRq9X&bL`oxR
+z>s)VUg?i_SH4a%$u`CTgLu0V-09iv%`H`|WP&jonx;F7!L$E+LE)`o|*}PF~=_@t#
+zuU&ePt?X;rXe;_oZYo9ZskMo+r=bwunAs9`Jdqtfasap}adgy~Y`2rWAiJGd#rA{5
+zD~=q>Vb%sHJ(oQxT_lzSmDO}fpOfr*#1%<Nt5tbcG8kI)8x(d>XLY|O%$jUZk_`5*
+zpf0%f6^3LqgL)c1lbv6=veRGa{3us;`OBWh!o{MeV~6iB>g}+2d`Z#L@p#rb&Dx_%
+zS+}HEQa3bcI4kx@P~YLKtEZCC@F5OoUG_0jmr1#?^A{*LJ~0_?qkPiT(^NDdd3}lc
+zmyJ|Po9#6SOulJRv7%F9`s&1$8H%HJW9(F^D;`fPOC%nryaw|@1;Cgm6vwFmlcSo{
+zSwnFGik=~G42;2&Vo}~8ib_R$uuLl21u_lxSGC8?fI=g~%Lp4SdqQC*0?fc}Z&&Wn
+zHL?WrpCWG>XTZiDmiZ@;Jq}}ha2jFn6Xbh>f_oxz_pAxP1lJng7oE6wzgfVcy+*`)
+z^Vwal?RQ_`R@Vmpy!(^)_feg20q1c!&{1e!Z@<;PG5KZmcJy)RY%z59-r#p5_eUQ3
+z9*RHve(?QNUphBc3Qa!_T`PvJl|t{90yBB>sp~>H(3BU;!H#{zxmBE>_;q0P0VxfP
+z7rnjtiNYHj+E%a}>da3T25(-b-oW?EKWe+v@@`DoX`FrJP3$>Y*z-E%_UDtghc+j-
+i2EV#|@3jYA_eV<|V@3biBiH%oL6+v8fcSR1Ab$g80HLY?
+
+literal 0
+HcmV?d00001
+
+diff --git a/client_test.py b/client_test.py
+index af2bf26..658346f 100644
+--- a/client_test.py
++++ b/client_test.py
+@@ -8,13 +8,23 @@ class ClientTest(unittest.TestCase):
+       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
+     ]
+     """ ------------ Add the assertion below ------------ """
++    for quote in quotes:
++      result = getDataPoint(quote) # Actual output from the getDataPoint function. The function is expected to return a tuple with four elements 
++      expected_price = (quote['top_bid']['price'] + quote['top_ask']['price']) / 2
++      self.assertEqual(result, (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], expected_price))
++
+ 
+   def test_getDataPoint_calculatePriceBidGreaterThanAsk(self):
+     quotes = [
+       {'top_ask': {'price': 119.2, 'size': 36}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 120.48, 'size': 109}, 'id': '0.109974697771', 'stock': 'ABC'},
+-      {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
++      {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 121.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
+     ]
+     """ ------------ Add the assertion below ------------ """
++    for quote in quotes:
++      result = getDataPoint(quote) # Actual output from the getDataPoint function. The function is expected to return a tuple with four elements 
++      expected_price = (quote['top_bid']['price'] + quote['top_ask']['price']) / 2
++      self.assertEqual(result, (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], expected_price))
++
+ 
+ 
+   """ ------------ Add more unit tests ------------ """
+-- 
+2.45.0.windows.1
+
